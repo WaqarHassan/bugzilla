@@ -8,7 +8,7 @@
         %th Name
         %th Total Bugs
         %th Creater 
-
+        
 
     %tbody
       - @projects.each do |project|
@@ -18,8 +18,9 @@
           / %td= link_to 'Edit Project', edit_project_path(project)
           / %td= link_to 'Delete Project', project, :method => :delete, :data => { :confirm => 'Are you sure?' }
           %td= project.bugs.count
+          %td= project.users.first.email
           / %td= project.user.name
-          %td= link_to "See All Bugs", project_bugs_path(project)
+          / %td= link_to "See All Bugs", project_bugs_path(project)
 
   %br
 
