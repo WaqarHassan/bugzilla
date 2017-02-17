@@ -1,5 +1,5 @@
 class ProjectsController < ApplicationController
-  before_action :set_project, only: [:show, :edit, :update, :destroy]
+  before_action :set_project, only: [:show, :edit, :update, :destroy, :bugs]
   before_action :authenticate_user!
   # GET /projects
   # GET /projects.json
@@ -61,7 +61,7 @@ class ProjectsController < ApplicationController
     end
   end
   def bugs
-
+    @bugs = @project.bugs
   end
   private
     # Use callbacks to share common setup or constraints between actions.
