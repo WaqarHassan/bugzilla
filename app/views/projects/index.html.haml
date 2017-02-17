@@ -1,22 +1,24 @@
-%h1 Listing projects
-= link_to "Sign Out", destroy_user_session_path, :method => :delete
 #main-container.container
-  %table
+  %h1 Listing projects
+  = link_to "Sign Out", destroy_user_session_path, :method => :delete
+  %table.table.table-hover.table-striped.table-bordered.table-responsive
     %thead
       %tr
+        %th Id
         %th Name
-        %th
-        %th
-        %th
+        %th Total Bugs
+        %th Creater 
+
 
     %tbody
       - @projects.each do |project|
         %tr
-          %td= project.name
-          %td= link_to 'Show', project
-          %td= link_to 'Edit', edit_project_path(project)
-          %td= link_to 'Destroy', project, :method => :delete, :data => { :confirm => 'Are you sure?' }
-          %td= link_to "add bug", new_bug_path
+          %td= project.id
+          %td= link_to project.name , project_bugs_path(project)
+          / %td= link_to 'Edit Project', edit_project_path(project)
+          / %td= link_to 'Delete Project', project, :method => :delete, :data => { :confirm => 'Are you sure?' }
+          %td= project.bugs.count
+          / %td= project.user.name
           %td= link_to "See All Bugs", project_bugs_path(project)
 
   %br
