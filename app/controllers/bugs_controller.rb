@@ -1,7 +1,8 @@
 class BugsController < ApplicationController
   before_action :set_bugs
   before_action :set_bug, only: [:show, :edit, :update, :destroy]
-
+  before_action :authenticate_user!
+  # GET /projects
   # GET projects/1/bugs
   def index
     @bugs = @project.bugs
