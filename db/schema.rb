@@ -11,7 +11,47 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170216120944) do
+ActiveRecord::Schema.define(version: 20170218093805) do
+
+  create_table "bug_users", force: :cascade do |t|
+    t.integer  "bug_id",     limit: 4
+    t.integer  "user_id",    limit: 4
+    t.datetime "created_at",           null: false
+    t.datetime "updated_at",           null: false
+  end
+
+  add_index "bug_users", ["bug_id", "user_id"], name: "index_bug_users_on_bug_id_and_user_id", using: :btree
+
+  create_table "bugs", force: :cascade do |t|
+    t.integer  "project_id",  limit: 4
+    t.string   "title",       limit: 255
+    t.string   "bug_type",    limit: 255
+    t.string   "status",      limit: 255
+    t.date     "deadline"
+    t.text     "description", limit: 65535
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
+    t.integer  "user_id",     limit: 4
+    t.integer  "solved_by",   limit: 4
+  end
+
+  add_index "bugs", ["project_id"], name: "fk_rails_8a33b02525", using: :btree
+  add_index "bugs", ["user_id"], name: "index_bugs_on_user_id", using: :btree
+
+  create_table "project_users", force: :cascade do |t|
+    t.integer  "user_id",    limit: 4
+    t.integer  "project_id", limit: 4
+    t.datetime "created_at",           null: false
+    t.datetime "updated_at",           null: false
+  end
+
+  add_index "project_users", ["project_id", "user_id"], name: "index_project_users_on_project_id_and_user_id", using: :btree
+
+  create_table "projects", force: :cascade do |t|
+    t.string   "name",       limit: 255
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+  end
 
   create_table "users", force: :cascade do |t|
     t.string   "name",                   limit: 255
@@ -33,4 +73,6 @@ ActiveRecord::Schema.define(version: 20170216120944) do
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
+  add_foreign_key "bugs", "projects"
+  add_foreign_key "bugs", "users"
 end

@@ -4,6 +4,10 @@
   <%= devise_error_messages! %>
 
   <div class="field">
+    <%= f.label :name %><br />
+    <%= f.text_field :name, autofocus: true , :required => true%>
+  </div>
+  <div class="field">
     <%= f.label :email %><br />
     <%= f.email_field :email, autofocus: true %>
   </div>
@@ -20,7 +24,22 @@
     <%= f.label :password_confirmation %><br />
     <%= f.password_field :password_confirmation, autocomplete: "off" %>
   </div>
-
+  <div class="field">
+    <fieldset class="radio-trio">
+      <label>
+        <input name="user_type" required="<%= true %>"  type="radio" value="Manager" checked></input>
+        Manager
+      </label>
+      <label>
+        <input name="user_type" required="<%= true %>"  type="radio" value="Developer"></input>
+        Developer
+      </label>
+      <label>
+        <input name="user_type" required="<%= true %>"  type="radio" value="QA"></input>
+        QA
+      </label>
+    </fieldset>
+  </div>
   <div class="actions">
     <%= f.submit "Sign up" %>
   </div>
