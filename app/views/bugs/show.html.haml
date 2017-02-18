@@ -4,7 +4,7 @@
   %b Title:
   = @bug.title
 %p
-  %b Type:
+  %b Bug type:
   = @bug.bug_type
 %p
   %b Status:
@@ -16,6 +16,6 @@
   %b Description:
   = @bug.description
 
-= link_to 'Edit', edit_bug_path(@bug)
+= link_to 'Edit', edit_project_bug_path(@bug.project, @bug)
 \|
-= link_to 'Back', bugs_path
+= link_to 'Back', project_bugs_path(@bug.project)

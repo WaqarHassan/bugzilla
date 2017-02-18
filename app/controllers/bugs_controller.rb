@@ -1,74 +1,64 @@
 class BugsController < ApplicationController
+  before_action :set_bugs
   before_action :set_bug, only: [:show, :edit, :update, :destroy]
-  before_action :authenticate_user!
-  # GET /bugs
-  # GET /bugs.json
+
+  # GET projects/1/bugs
   def index
-    @bugs = Bug.all
+    @bugs = @project.bugs
   end
 
-  # GET /bugs/1
-  # GET /bugs/1.json
+  # GET projects/1/bugs/1
   def show
   end
 
-  # GET /bugs/new
+  # GET projects/1/bugs/new
   def new
-    @bug = Bug.new
+    @bug = @project.bugs.build
   end
 
-  # GET /bugs/1/edit
+  # GET projects/1/bugs/1/edit
   def edit
   end
 
-  # POST /bugs
-  # POST /bugs.json
+  # POST projects/1/bugs
   def create
-    @bug = Bug.new(bug_params)
+    @bug = @project.bugs.build(bug_params)
 
-    respond_to do |format|
-      if @bug.save
-        format.html { redirect_to @bug, notice: 'Bug was successfully created.' }
-        format.json { render :show, status: :created, location: @bug }
-      else
-        format.html { render :new }
-        format.json { render json: @bug.errors, status: :unprocessable_entity }
-      end
+    if @bug.save
+      redirect_to([@bug.project, @bug], notice: 'Bug was successfully created.')
+    else
+      render action: 'new'
     end
   end
 
-  # PATCH/PUT /bugs/1
-  # PATCH/PUT /bugs/1.json
+  # PUT projects/1/bugs/1
   def update
-    respond_to do |format|
-      if @bug.update(bug_params)
-        format.html { redirect_to @bug, notice: 'Bug was successfully updated.' }
-        format.json { render :show, status: :ok, location: @bug }
-      else
-        format.html { render :edit }
-        format.json { render json: @bug.errors, status: :unprocessable_entity }
-      end
+    if @bug.update_attributes(bug_params)
+      redirect_to([@bug.project, @bug], notice: 'Bug was successfully updated.')
+    else
+      render action: 'edit'
     end
   end
 
-  # DELETE /bugs/1
-  # DELETE /bugs/1.json
+  # DELETE projects/1/bugs/1
   def destroy
     @bug.destroy
-    respond_to do |format|
-      format.html { redirect_to bugs_url, notice: 'Bug was successfully destroyed.' }
-      format.json { head :no_content }
-    end
+
+    redirect_to project_bugs_url(@project)
   end
 
   private
     # Use callbacks to share common setup or constraints between actions.
-    def set_bug
-      @bug = Bug.find(params[:id])
+    def set_bugs
+      @project = Project.find(params[:project_id])
     end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
+    def set_bug
+      @bug = @project.bugs.find(params[:id])
+    end
+
+    # Only allow a trusted parameter "white list" through.
     def bug_params
-      params.require(:bug).permit(:title, :type, :status, :deadline, :description)
+      params.require(:bug).permit(:title, :bug_type, :status, :deadline, :description)
     end
 end

@@ -1,13 +1,14 @@
 Rails.application.routes.draw do
-  resources :bugs
-  resources :projects
+  resources :projects do
+    resources :bugs
+  end
   devise_for :users
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
   root 'projects#index'
-  get "/projects/bugs/:id" => "projects#bugs" , as: "project_bugs"
+  # get "/projects/bugs/:id" => "projects#bugs" , as: "project_bugs"
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 
