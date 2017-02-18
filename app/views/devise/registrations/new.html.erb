@@ -25,20 +25,7 @@
     <%= f.password_field :password_confirmation, autocomplete: "off" %>
   </div>
   <div class="field">
-    <fieldset class="radio-trio">
-      <label>
-        <input name="user_type" required="<%= true %>"  type="radio" value="Manager" checked></input>
-        Manager
-      </label>
-      <label>
-        <input name="user_type" required="<%= true %>"  type="radio" value="Developer"></input>
-        Developer
-      </label>
-      <label>
-        <input name="user_type" required="<%= true %>"  type="radio" value="QA"></input>
-        QA
-      </label>
-    </fieldset>
+    <%= f.collection_radio_buttons :user_type, User.user_types, :first, :first %>
   </div>
   <div class="actions">
     <%= f.submit "Sign up" %>

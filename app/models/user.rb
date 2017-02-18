@@ -8,5 +8,7 @@ class User < ActiveRecord::Base
   
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
-  enum user_type: [ :manager,:developer, :qa] 
+  
+  enum user_type: [ "Manager","Developer", "QA"] 
+  USER_TYPE = ["Manager","Developer","QA"]
 end
