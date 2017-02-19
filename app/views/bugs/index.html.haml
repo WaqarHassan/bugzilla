@@ -5,11 +5,7 @@
     .col-lg-5
       
     .col-lg-3
-      %span{:title => "Only Manager/QA can Add Bug"}
-        - if current_user.user_type.downcase == "manager" || current_user.user_type.downcase == "qa"
-          = link_to 'New Bug', new_project_bug_path(params[:project_id]) , class: "btn btn-success"
-        - else
-          = link_to 'New Bug', new_project_bug_path(params[:project_id]), class: "btn btn-success disabled"
+      = link_to 'New Bug', new_project_bug_path(params[:project_id]) , class: "btn btn-success"
       = link_to 'Back to projects', projects_path,  class: "btn btn-success pull-right"
   %table#bugs_table.table.table-hover.table-striped.table-bordered.table-responsive
     %thead
@@ -20,6 +16,8 @@
         %th Deadline
         %th Description
         %th Action
+        %th Solved By
+        %th Created by
     %tbody
       - @bugs.each do |bug|
         %tr
@@ -32,7 +30,8 @@
             %td= link_to "Mark as Completed",resolve_bug_path(bug.project,bug.id)
           - else
             %td= link_to "Mark as Resolved",resolve_bug_path(bug.project,bug.id)
-          / %td= link_to 'Destroy', [bug.project, bug], :confirm => 'Are you sure?', :method => :delete
+          %td= bug.solved_by.present? ? get_user(bug.solved_by) : ""
+          %td= bug.user.name
 
   %br
 

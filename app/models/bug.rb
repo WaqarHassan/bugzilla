@@ -1,5 +1,6 @@
 class Bug < ActiveRecord::Base
   belongs_to :project
+  belongs_to :user
   enum bug_type: [ "Feature","Bug"]
   validates :title,:presence => {:message => "Title can't be blank." },
           :uniqueness => {:message => "Title already exists."}
