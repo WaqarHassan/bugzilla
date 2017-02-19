@@ -2,5 +2,6 @@
 .welcome_heading
 	%h3 Welcome To BugZilla
 .projects
-	= link_to "project", projects_path, class: "btn btn-project"
-	= link_to "Open New Account", new_user_registration_path, class: "btn btn-account"
+	= link_to "Projects", projects_path, class: "btn btn-project btn-home"
+	= link_to "Create Account", new_user_registration_path, class: "btn btn-account btn-home"
+	= link_to "Sign In", new_user_session_path, class: "btn btn-account btn-home"

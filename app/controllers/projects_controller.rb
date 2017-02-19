@@ -17,7 +17,11 @@ class ProjectsController < ApplicationController
 
   # GET /projects/new
   def new
-    @project = Project.new
+    if current_user.user_type.downcase == "manager"
+      @project = Project.new
+    else
+      redirect_to root_path, notice: 'only manager can add project'
+    end
   end
 
   # GET /projects/1/edit

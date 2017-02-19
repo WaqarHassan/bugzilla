@@ -29,7 +29,7 @@
           - if current_user.present?
             - n = "Welcome " + current_user.name
             %li 
-              %h3{:style => "color: white;"}
+              %h4{:style => "color: white;"}
                 = n
             %li
               = link_to "Sign out" , destroy_user_session_path, :method => :delete

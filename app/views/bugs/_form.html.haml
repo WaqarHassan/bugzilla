@@ -8,22 +8,22 @@
   = f.hidden_field :user_id , :value => @user_id
   .field
     = f.label :title
-    = f.text_field :title
+    = f.text_field :title ,class: "form-control"
   .field
     = f.label :bug_type
-    = f.collection_select :bug_type, Bug.bug_types, :first, :first
+    = f.collection_select :bug_type, Bug.bug_types, :first, :first, {}, class: "form-control"
   .field#type_feature
     = f.label :status
-    = f.select :status, options_for_select(["New","Started","Completed"])
+    = f.select :status, options_for_select(["New","Started","Completed"]), {}, class: "form-control"
   .field#type_bug.hide_select
     = f.label :status
-    = f.select :status, options_for_select(["New","Started","Resolved"])
+    = f.select :status, options_for_select(["New","Started","Resolved"]), {}, class: "form-control"
   .field
     = f.label :deadline
-    = f.date_select :deadline
+    = f.date_select :deadline, {}, class: "form-control"
   .field
     = f.label :description
-    = f.text_area :description
+    = f.text_area :description,class: "form-control",:rows => "5"
   .actions
-    = f.submit 'Save'
+    = f.submit 'Save', class: "btn btn-success"
 

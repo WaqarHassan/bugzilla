@@ -18,6 +18,5 @@
     %b Description:
     = @bug.description
 
-  = link_to 'Edit', edit_project_bug_path(@bug.project, @bug)
-  \|
-  = link_to 'Back', project_bugs_path(@bug.project)
+  = link_to 'Edit', edit_project_bug_path(@bug.project, @bug), class: "btn btn-success"
+  = link_to 'Back', project_bugs_path(@bug.project), class: "btn btn-success"

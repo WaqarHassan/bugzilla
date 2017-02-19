@@ -1,9 +1,8 @@
 .container.form-signin
 	%p#notice= notice
-
 	%p
-	  %b Name:
-	  = @project.name
+		%b Name:
+		= @project.name
 
-	= link_to 'Edit', edit_project_path(@project)
-	= link_to 'Back', projects_path
+	= link_to 'Edit', edit_project_path(@project), class: "btn btn-success"
+	= link_to 'Back', projects_path, class: "btn btn-success"

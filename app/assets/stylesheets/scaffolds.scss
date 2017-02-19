@@ -95,6 +95,7 @@ body {
 .btn-account {
   animation: 0s ease 0s normal backwards 1 running none;
     background: lightblue none repeat scroll 0 0;
+    color: black;
     /*margin-left: 500px;*/
     margin-top: 80px;
     padding: 50px;
@@ -123,4 +124,7 @@ thead {
 }
 .btn-success {
   margin-top: 25px;
+}
+.btn-home {
+    color: darkcyan !important;
 }

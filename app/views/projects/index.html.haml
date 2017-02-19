@@ -11,22 +11,27 @@
   %table#projects_table.table.table-hover.table-striped.table-bordered.table-responsive
     %thead
       %tr
-        %th Id
         %th Name
         %th Total Bugs
         %th Creater 
+        %th Bugs
+        %th Add New Bug
         
 
     %tbody
       - @projects.each do |project|
         %tr
-          %td= project.id
-          %td= link_to project.name , project_bugs_path(project)
+          %td= link_to project.name , edit_project_path(project)
           / %td= link_to 'Edit Project', edit_project_path(project)
           / %td= link_to 'Delete Project', project, :method => :delete, :data => { :confirm => 'Are you sure?' }
           %td= project.bugs.count
           %td= project.users.first.name
-
+          %td= link_to "See All Bugs", project_bugs_path(project)
+          %td
+            - if current_user.user_type.to_s.downcase == "developer"
+              Not Allowed
+            - else
+              = link_to 'New Bug', new_project_bug_path(project)
   %br
 
 = javascript_include_tag "common"
