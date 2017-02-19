@@ -1,0 +1,1 @@
+$('.table.table-hover.table-striped.table-bordered.table-responsive').dataTable();

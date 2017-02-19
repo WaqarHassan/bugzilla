@@ -1,5 +1,5 @@
 class BugsController < ApplicationController
-  before_action :set_bugs
+  before_action :set_project 
   before_action :set_bug, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_user!
   # GET /projects
@@ -48,10 +48,16 @@ class BugsController < ApplicationController
 
     redirect_to project_bugs_url(@project)
   end
-
+  def resolve_bug
+    bug = Bug.find_by_id(params[:bug_id])
+    bug.status = "Resolved"
+    bug.save!
+    puts "-----------------------------------------------------------"
+    redirect_to project_bugs_path
+  end
   private
     # Use callbacks to share common setup or constraints between actions.
-    def set_bugs
+    def set_project
       @project = Project.find(params[:project_id])
     end
 

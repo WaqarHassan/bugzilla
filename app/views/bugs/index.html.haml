@@ -1,28 +1,30 @@
 #main-container.container
   %h1 Listing bugs
-
   %table.table.table-hover.table-striped.table-bordered.table-responsive
-    %tr
-      %th Title
-      %th Bug type
-      %th Status
-      %th Deadline
-      %th Description
-      %th
-      %th
-      %th
-
-    - @bugs.each do |bug|
+    %thead
       %tr
-        %td= bug.title
-        %td= bug.bug_type
-        %td= bug.status
-        %td= bug.deadline
-        %td= bug.description
-        %td= link_to 'Show', [bug.project, bug]
-        %td= link_to 'Edit', edit_project_bug_path(bug.project, bug)
-        %td= link_to 'Destroy', [bug.project, bug], :confirm => 'Are you sure?', :method => :delete
+        %th Title
+        %th Bug type
+        %th Status
+        %th Deadline
+        %th Description
+        %th Flag
+        %th
+        %th
+    %tbody
+      - @bugs.each do |bug|
+        %tr
+          %td= bug.title
+          %td= bug.bug_type
+          %td= bug.status
+          %td= bug.deadline
+          %td= bug.description
+          %td= link_to "Mark as Completed",resolve_bug_path(bug.project,bug.id)#, :remote => true 
+          %td= link_to 'Show', [bug.project, bug]
+          %td= link_to 'Edit', edit_project_bug_path(bug.project, bug)
+          / %td= link_to 'Destroy', [bug.project, bug], :confirm => 'Are you sure?', :method => :delete
 
   %br
 
   = link_to 'New Bug', new_project_bug_path(params[:project_id])
+  = link_to 'Back to projects', projects_path

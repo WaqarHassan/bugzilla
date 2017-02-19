@@ -9,6 +9,7 @@ Rails.application.routes.draw do
 
   # You can have the root of your site routed with "root"
   root 'projects#index'
+  get "projects/bugs/:project_id/:bug_id" => "bugs#resolve_bug", as: "resolve_bug"
   # get "/projects/bugs/:id" => "projects#bugs" , as: "project_bugs"
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
