@@ -1,8 +1,11 @@
 class ProjectsController < ApplicationController
   before_action :set_project, only: [:show, :edit, :update, :destroy, :bugs]
-  before_action :authenticate_user!
+  skip_before_action :authenticate_user!, only: [:home]
   # GET /projects
   # GET /projects.json
+  def home 
+
+  end
   def index
     @projects = Project.all
   end

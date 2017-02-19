@@ -1,7 +1,14 @@
 #main-container.container
-  %h1 Listing projects
-  = link_to "Sign Out", destroy_user_session_path, :method => :delete
-  %table.table.table-hover.table-striped.table-bordered.table-responsive
+  .col-lg-12
+    .col-lg-4
+      %h1.pull-left Projects List
+    .col-lg-6
+    .col-lg-2.pull-right{:title => "Only Manager can Add Project"}
+      - if current_user.user_type.to_s.downcase == "manager"
+        = link_to 'New Project', new_project_path , class: "btn btn-success"
+      - else
+        = link_to 'New Project', new_project_path, class: "btn btn-success disabled"
+  %table#projects_table.table.table-hover.table-striped.table-bordered.table-responsive
     %thead
       %tr
         %th Id
@@ -21,14 +28,6 @@
           %td= project.users.first.name
 
   %br
-  .tooltip-wrapper{:title => "Only Manager can Add Project"}
-    - if current_user.user_type == "Manager"
-      = link_to 'New Project', new_project_path , class: "btn btn-success"
-    - else
-      = link_to 'New Project', new_project_path, class: "btn btn-default disabled"
 
 = javascript_include_tag "common"
-- content_for :javascript do
-  :javascript
-    $('.table.table-hover.table-striped.table-bordered.table-responsive').dataTable()
 

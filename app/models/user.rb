@@ -11,4 +11,5 @@ class User < ActiveRecord::Base
   
   enum user_type: [ "Manager","Developer", "QA"] 
   USER_TYPE = ["Manager","Developer","QA"]
+  validates :user_type,:presence => {:message => "can't be blank." }
 end

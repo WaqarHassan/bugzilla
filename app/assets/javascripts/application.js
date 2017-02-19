@@ -16,4 +16,5 @@
 //= require bootstrap-sprockets
 //= require bugs
 //= require projects
+//= require common
 //= require_tree .

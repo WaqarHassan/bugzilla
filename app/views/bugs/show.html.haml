@@ -1,21 +1,23 @@
-%p#notice= notice
+.container.form-signin
 
-%p
-  %b Title:
-  = @bug.title
-%p
-  %b Bug type:
-  = @bug.bug_type
-%p
-  %b Status:
-  = @bug.status
-%p
-  %b Deadline:
-  = @bug.deadline
-%p
-  %b Description:
-  = @bug.description
+  %p#notice= notice
 
-= link_to 'Edit', edit_project_bug_path(@bug.project, @bug)
-\|
-= link_to 'Back', project_bugs_path(@bug.project)
+  %p
+    %b Title:
+    = @bug.title
+  %p
+    %b Bug type:
+    = @bug.bug_type
+  %p
+    %b Status:
+    = @bug.status
+  %p
+    %b Deadline:
+    = @bug.deadline
+  %p
+    %b Description:
+    = @bug.description
+
+  = link_to 'Edit', edit_project_bug_path(@bug.project, @bug)
+  \|
+  = link_to 'Back', project_bugs_path(@bug.project)

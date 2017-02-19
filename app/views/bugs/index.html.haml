@@ -1,30 +1,39 @@
 #main-container.container
-  %h1 Listing bugs
-  %table.table.table-hover.table-striped.table-bordered.table-responsive
+  .col-lg-12
+    .col-lg-4
+      %h1.pull-left Bugs List
+    .col-lg-5
+      
+    .col-lg-3
+      %span{:title => "Only Manager can Add Project"}
+        - if current_user.user_type == "Manager"
+          = link_to 'New Bug', new_project_bug_path(params[:project_id]) , class: "btn btn-success"
+        - else
+          = link_to 'New Bug', new_project_bug_path(params[:project_id]), class: "btn btn-success disabled"
+      = link_to 'Back to projects', projects_path,  class: "btn btn-success pull-right"
+  %table#bugs_table.table.table-hover.table-striped.table-bordered.table-responsive
     %thead
       %tr
-        %th Title
+        %th Bug Title
         %th Bug type
         %th Status
         %th Deadline
         %th Description
-        %th Flag
-        %th
-        %th
+        %th Action
     %tbody
       - @bugs.each do |bug|
         %tr
-          %td= bug.title
+          %td= link_to bug.title ,project_bug_path(bug.project,bug.id)
           %td= bug.bug_type
           %td= bug.status
           %td= bug.deadline
           %td= bug.description
-          %td= link_to "Mark as Completed",resolve_bug_path(bug.project,bug.id)#, :remote => true 
-          %td= link_to 'Show', [bug.project, bug]
-          %td= link_to 'Edit', edit_project_bug_path(bug.project, bug)
+          - if bug.bug_type == "Feature"
+            %td= link_to "Mark as Completed",resolve_bug_path(bug.project,bug.id)
+          - else
+            %td= link_to "Mark as Resolved",resolve_bug_path(bug.project,bug.id)
           / %td= link_to 'Destroy', [bug.project, bug], :confirm => 'Are you sure?', :method => :delete
 
   %br
 
-  = link_to 'New Bug', new_project_bug_path(params[:project_id])
-  = link_to 'Back to projects', projects_path
+= javascript_include_tag "common"
