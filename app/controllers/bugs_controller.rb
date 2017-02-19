@@ -13,12 +13,8 @@ class BugsController < ApplicationController
 
   # GET projects/1/bugs/new
   def new
-    if current_user.user_type.downcase != "developer"
       @user_id= current_user.id
       @bug = @project.bugs.build
-    else
-       redirect_to root_path, notice: 'Only Manager/QA can add project'
-    end
   end
 
   # GET projects/1/bugs/1/edit
@@ -58,6 +54,7 @@ class BugsController < ApplicationController
     else
       bug.status = "resolved"
     end
+    bug.solved_by = current_user.id
     bug.save!
     redirect_to project_bugs_path
   end
