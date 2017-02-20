@@ -31,7 +31,7 @@
           - else
             %td= link_to "Mark as Resolved",resolve_bug_path(bug.project,bug.id)
           %td= bug.solved_by.present? ? get_user(bug.solved_by) : ""
-          %td= bug.user.name
+          %td= bug.user.name.present? ? bug.user.name : "N/A"
 
   %br
 
